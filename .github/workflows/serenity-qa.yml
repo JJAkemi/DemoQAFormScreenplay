@@ -29,6 +29,7 @@ jobs:
       # 1. Ejecuta las pruebas (sin generar el reporte consolidado)
       - name: Run Serenity Tests
         run: mvn clean verify -DskipTests=false
+        timeout-minutes: 5
 
       # 2. **Paso Añadido/Modificado:** Genera el reporte HTML final de Serenity
       - name: Generate Serenity Report
