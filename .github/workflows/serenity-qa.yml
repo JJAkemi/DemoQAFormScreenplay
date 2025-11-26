@@ -3,7 +3,7 @@ name: Serenity BDD QA Pipeline
 on:
   push:
     branches:
-      - qa
+      - qa # Ejecución automática al hacer push a la rama 'qa'
 
 jobs:
   test:
@@ -16,8 +16,8 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: 17
-          distribution: temurin
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -26,11 +26,20 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+      # 1. Ejecuta las pruebas (sin generar el reporte consolidado)
       - name: Run Serenity Tests
         run: mvn clean verify -DskipTests=false
 
+      # 2. **Paso Añadido/Modificado:** Genera el reporte HTML final de Serenity
+      - name: Generate Serenity Report
+        run: mvn serenity:aggregate
+        # Opcional: Puedes añadir 'if: always()' aquí si quieres que se genere el reporte
+        # incluso si las pruebas fallan (para ver los resultados parciales).
+
+      # 3. Sube el reporte como artefacto
       - name: Upload Serenity Report
         uses: actions/upload-artifact@v4
+        if: always() # Usar 'always()' asegura que el reporte se suba, sea exitoso o no el build.
         with:
           name: serenity-report
-          path: target/site/serenity/
+          path: target/site/serenity/ # Ruta donde se encuentra el reporte consolidado
