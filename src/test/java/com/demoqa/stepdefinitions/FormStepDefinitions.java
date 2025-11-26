@@ -7,7 +7,6 @@ import com.demoqa.utils.ExcelReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actions.Open;
 
 import java.util.List;
@@ -27,8 +26,7 @@ public class FormStepDefinitions {
 
     @When("the user fills the form with Excel data row {int}")
     public void fillFormWithExcelData(int rowNumber) {
-
-        String excelPath = "C:\\DemoQAData\\users.xlsx";
+        String excelPath = "src/test/resources/data/demoqa/users.xlsx";
         List<UserForm> users = ExcelReader.readUsersFromExcel(excelPath);
 
         UserForm user = users.get(rowNumber - 1);
