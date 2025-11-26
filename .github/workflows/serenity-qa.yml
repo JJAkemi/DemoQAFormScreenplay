@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - qa # Ejecución automática al hacer push a la rama 'qa'
+  pull_request:
+    branches:
+      - qa # Ejecuta las pruebas ANTES de que el código se fusione a 'qa'.
 
 jobs:
   test:
