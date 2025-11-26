@@ -36,8 +36,7 @@ public class FillForm {
 
                         // Este ya estaba correcto:
                         WaitUntil.the(DemoQAFormPage.SUBJECTS, isCurrentlyEnabled()).forNoMoreThan(10).seconds(),
-                        Enter.theValue(user.getSubject()).into(DemoQAFormPage.SUBJECTS),
-                        Hit.the(Keys.ENTER).into(DemoQAFormPage.SUBJECTS),
+                        Enter.theValue(user.getSubject()).into(DemoQAFormPage.SUBJECTS).thenHit(Keys.ENTER),
 
                         selectHobbie(user.getHobbie()),
 
