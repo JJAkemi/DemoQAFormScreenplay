@@ -1,0 +1,41 @@
+name: Serenity BDD QA Pipeline
+
+on:
+  push:
+    branches:
+      - qa   # <-- Solo ejecuta pipeline al hacer push a la rama QA
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configurar Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+
+      # 3. Cache Maven para acelerar
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      # 4. Ejecutar pruebas Serenity
+      - name: Run Serenity Tests
+        run: mvn clean verify -DskipTests=false
+
+      # 5. Guardar reporte Serenity como artefacto
+      - name: Upload Serenity Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: serenity-report
+          path: target/site/serenity/
