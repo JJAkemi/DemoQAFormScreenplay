@@ -32,8 +32,6 @@ public class FillForm {
                         WaitUntil.the(DemoQAFormPage.MOBILE, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getMobile()).into(DemoQAFormPage.MOBILE),
 
-                        //setDateOfBirth(user.getDateOfBirth())
-
                         // Este ya estaba correcto:
                         WaitUntil.the(DemoQAFormPage.SUBJECTS, isCurrentlyEnabled()).forNoMoreThan(10).seconds(),
                         Enter.theValue(user.getSubject()).into(DemoQAFormPage.SUBJECTS).thenHit(Keys.ENTER),
