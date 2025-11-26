@@ -38,6 +38,7 @@ public class FillForm {
                         WaitUntil.the(DemoQAFormPage.SUBJECTS, isVisible()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.SUBJECTS),
                         Enter.theValue(user.getSubject()).into(DemoQAFormPage.SUBJECTS),
+                        Hit.the(Keys.ENTER).into(DemoQAFormPage.SUBJECTS),
 
                         selectHobbie(user.getHobbie()),
 
