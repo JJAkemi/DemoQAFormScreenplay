@@ -8,6 +8,7 @@ import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.Keys;
 
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isCurrentlyEnabled;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 public class FillForm {
@@ -35,7 +36,7 @@ public class FillForm {
 
                         //setDateOfBirth(user.getDateOfBirth())
 
-                        WaitUntil.the(DemoQAFormPage.SUBJECTS, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.SUBJECTS, isCurrentlyEnabled()).forNoMoreThan(10).seconds(),
                         Scroll.to(DemoQAFormPage.SUBJECTS),
                         Enter.theValue(user.getSubject()).into(DemoQAFormPage.SUBJECTS),
                         Hit.the(Keys.ENTER).into(DemoQAFormPage.SUBJECTS),
