@@ -16,47 +16,43 @@ public class FillForm {
     public static Performable withData(UserForm user) {
         return Task.where("{0} fills the DemoQA form with Excel data",
                 actor -> actor.attemptsTo(
-                        WaitUntil.the(DemoQAFormPage.FIRST_NAME, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.FIRST_NAME),
+                        // Corregido: Usar isCurrentlyEnabled() en todos los campos de entrada
+                        WaitUntil.the(DemoQAFormPage.FIRST_NAME, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getFirstName()).into(DemoQAFormPage.FIRST_NAME),
 
-                        WaitUntil.the(DemoQAFormPage.LAST_NAME, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.LAST_NAME),
+                        WaitUntil.the(DemoQAFormPage.LAST_NAME, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getLastName()).into(DemoQAFormPage.LAST_NAME),
 
-                        WaitUntil.the(DemoQAFormPage.EMAIL, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.EMAIL),
+                        // ⬅️ CORRECCIÓN CLAVE AQUÍ: EMAIL
+                        WaitUntil.the(DemoQAFormPage.EMAIL, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getEmail()).into(DemoQAFormPage.EMAIL),
 
                         selectGender(user.getGender()),
 
-                        WaitUntil.the(DemoQAFormPage.MOBILE, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.MOBILE),
+                        WaitUntil.the(DemoQAFormPage.MOBILE, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getMobile()).into(DemoQAFormPage.MOBILE),
 
                         //setDateOfBirth(user.getDateOfBirth())
 
+                        // Este ya estaba correcto:
                         WaitUntil.the(DemoQAFormPage.SUBJECTS, isCurrentlyEnabled()).forNoMoreThan(10).seconds(),
-                        Scroll.to(DemoQAFormPage.SUBJECTS),
                         Enter.theValue(user.getSubject()).into(DemoQAFormPage.SUBJECTS),
                         Hit.the(Keys.ENTER).into(DemoQAFormPage.SUBJECTS),
 
                         selectHobbie(user.getHobbie()),
 
-                        WaitUntil.the(DemoQAFormPage.ADDRESS, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.ADDRESS),
+                        WaitUntil.the(DemoQAFormPage.ADDRESS, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getAddress()).into(DemoQAFormPage.ADDRESS),
 
-                        WaitUntil.the(DemoQAFormPage.STATE, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.STATE),
+                        // Los campos de STATE/CITY (autocompletado) requieren ENTER
+                        WaitUntil.the(DemoQAFormPage.STATE, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getState()).into(DemoQAFormPage.STATE).thenHit(Keys.ENTER),
 
-                        WaitUntil.the(DemoQAFormPage.CITY, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.CITY),
+                        WaitUntil.the(DemoQAFormPage.CITY, isCurrentlyEnabled()).forNoMoreThan(15).seconds(),
                         Enter.theValue(user.getCity()).into(DemoQAFormPage.CITY).thenHit(Keys.ENTER),
 
-                        WaitUntil.the(DemoQAFormPage.SUBMIT_BUTTON, isVisible()).forNoMoreThan(20).seconds(),
-                        Scroll.to(DemoQAFormPage.SUBMIT_BUTTON),
+                        WaitUntil.the(DemoQAFormPage.SUBMIT_BUTTON, isVisible()).forNoMoreThan(15).seconds(),
+                        Scroll.to(DemoQAFormPage.SUBMIT_BUTTON), // Mantener Scroll para asegurar que el botón esté en vista
                         Click.on(DemoQAFormPage.SUBMIT_BUTTON)
                 ));
     }
