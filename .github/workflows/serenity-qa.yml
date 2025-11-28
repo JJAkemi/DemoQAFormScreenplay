@@ -1,9 +1,9 @@
 name: Serenity BDD QA Pipeline
 
 on:
-  push:
+  pull_request:
     branches:
-      - qa # Ejecución automática al hacer push a la rama 'qa'
+      - qa # Ejecución automática al hacer pr a la rama 'qa'
 
 jobs:
   test:
