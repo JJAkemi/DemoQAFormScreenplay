@@ -3,7 +3,7 @@ name: Serenity BDD QA Pipeline
 on:
   pull_request:
     branches:
-      - qa # Ejecución automática al hacer PR a la rama 'qa'
+      - qa # Ejecución automática al hacer Pull Request a la rama 'qa'
 
 jobs:
   test:
