@@ -16,21 +16,21 @@ public class FillForm {
     public static Performable withData(UserForm user) {
         return Task.where("{0} fills the DemoQA form with Excel data",
                 actor -> actor.attemptsTo(
-                        WaitUntil.the(DemoQAFormPage.FIRST_NAME, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.FIRST_NAME, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.FIRST_NAME),
                         Enter.theValue(user.getFirstName()).into(DemoQAFormPage.FIRST_NAME),
 
-                        WaitUntil.the(DemoQAFormPage.LAST_NAME, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.LAST_NAME, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.LAST_NAME),
                         Enter.theValue(user.getLastName()).into(DemoQAFormPage.LAST_NAME),
 
-                        WaitUntil.the(DemoQAFormPage.EMAIL, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.EMAIL, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.EMAIL),
                         Enter.theValue(user.getEmail()).into(DemoQAFormPage.EMAIL),
 
                         selectGender(user.getGender()),
 
-                        WaitUntil.the(DemoQAFormPage.MOBILE, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.MOBILE, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.MOBILE),
                         Enter.theValue(user.getMobile()).into(DemoQAFormPage.MOBILE),
 
@@ -42,19 +42,19 @@ public class FillForm {
 
                         selectHobbie(user.getHobbie()),
 
-                        WaitUntil.the(DemoQAFormPage.ADDRESS, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.ADDRESS, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.ADDRESS),
                         Enter.theValue(user.getAddress()).into(DemoQAFormPage.ADDRESS),
 
-                        WaitUntil.the(DemoQAFormPage.STATE, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.STATE, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.STATE),
                         Enter.theValue(user.getState()).into(DemoQAFormPage.STATE).thenHit(Keys.ENTER),
 
-                        WaitUntil.the(DemoQAFormPage.CITY, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.CITY, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.CITY),
                         Enter.theValue(user.getCity()).into(DemoQAFormPage.CITY).thenHit(Keys.ENTER),
 
-                        WaitUntil.the(DemoQAFormPage.SUBMIT_BUTTON, isVisible()).forNoMoreThan(20).seconds(),
+                        WaitUntil.the(DemoQAFormPage.SUBMIT_BUTTON, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
                         Scroll.to(DemoQAFormPage.SUBMIT_BUTTON),
                         Click.on(DemoQAFormPage.SUBMIT_BUTTON)
                 ));
